@@ -42,11 +42,13 @@ log "완료: $(basename "$FILE")"
 echo "백업 완료: $FILE"
 
 # --- 4. 오래된 백업 지우기 (최근 KEEP 개만 남김) -----------------------
-COUNT=0
-for old in $(ls -1t "$DEST"/"${NAME}"-*.tar.gz); do
-    COUNT=$((COUNT + 1))
-    if [ "$COUNT" -gt "$KEEP" ]; then
-        rm -- "$old"
-        log "삭제: $(basename "$old")"
-    fi
+# 파일 이름에 날짜·시각(YYYYMMDD-HHMMSS)이 들어 있어 이름 순서 = 시간 순서다.
+# ls 결과를 for 로 돌리면 이름에 공백이 있을 때 깨지므로, 글로브를 배열로 받는다.
+shopt -s nullglob
+BACKUPS=("$DEST"/"${NAME}"-*.tar.gz)
+TOTAL=${#BACKUPS[@]}
+for ((i = 0; i < TOTAL - KEEP; i++)); do
+    old="${BACKUPS[$i]}"
+    rm -- "$old"
+    log "삭제: $(basename "$old")"
 done
