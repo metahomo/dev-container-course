@@ -1,0 +1,86 @@
+site_name: 개발환경과 컨테이너 — 1학년을 위한 공개 강좌
+site_description: 파이썬 기초만 있는 대학교 1학년이 12주 동안 Git·GitHub, Linux, Docker 로 내 코드를 어디서나 똑같이 돌리고 함께 만드는 법을 배우는 무료 공개 강좌
+site_url: https://metahomo.github.io/dev-container-course/
+repo_url: https://github.com/metahomo/dev-container-course
+repo_name: metahomo/dev-container-course
+docs_dir: docs
+theme:
+  name: material
+  language: ko
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - content.code.copy
+    - content.tabs.link
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: deep orange
+      accent: orange
+      toggle: {icon: material/weather-night, name: 어두운 화면}
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep orange
+      accent: orange
+      toggle: {icon: material/weather-sunny, name: 밝은 화면}
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed: {alternate_style: true}
+  - pymdownx.arithmatex: {generic: true}
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.tasklist: {custom_checkbox: true}
+  - attr_list
+  - md_in_html
+  - tables
+  - toc: {permalink: true}
+extra_javascript:
+  - assets/progress.js
+extra_css:
+  - assets/course.css
+plugins:
+  - search:
+      lang: [ko, en]
+  - mkdocs-jupyter:
+      execute: false
+      include_source: true
+nav:
+  - 시작: index.md
+  - 강좌 안내:
+      - 12주 계획표: guide/syllabus.md
+      - 진도 조감도: guide/progress.md
+      - 공부하는 법: guide/how-to-study.md
+      - 실습 환경 만들기: guide/setup.md
+      - 교재와 자료: guide/books.md
+      - 2026 최신 기술 지도: guide/tech-map.md
+      - 명령어 치트시트: guide/cheatsheet.md
+      - 용어집: guide/glossary.md
+  - 0주 준비:
+      - 0주 터미널과 WSL: weeks/week00.md
+  - 1부 Git·GitHub (1~3주):
+      - 1주 Git 첫걸음: weeks/week01.md
+      - 2주 브랜치와 병합: weeks/week02.md
+      - 3주 GitHub 로 함께 일하기: weeks/week03.md
+  - 2부 Linux (4~6주):
+      - 4주 셸과 파일 시스템: weeks/week04.md
+      - 5주 권한·프로세스·서비스: weeks/week05.md
+      - 6주 원격 접속과 자동화: weeks/week06.md
+  - 3부 Docker (7~10주):
+      - 7주 컨테이너와 이미지: weeks/week07.md
+      - 8주 Dockerfile 과 빌드: weeks/week08.md
+      - 9주 볼륨·네트워크·설정: weeks/week09.md
+      - 10주 Compose 로 여러 서비스: weeks/week10.md
+  - 4부 ML 컨테이너 운영 (11~12주):
+      - 11주 배포·보안·자원·GPU: weeks/week11.md
+      - 12주 종합 프로젝트: weeks/week12.md
+  - 실습: labs/index.md
+

@@ -1,0 +1,12 @@
+site/
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+*.pyc
+.DS_Store
+docs/labs/**/data/
+docs/labs/**/artifacts/
+*.onnx
+*.pt
+*.pth
+*.safetensors

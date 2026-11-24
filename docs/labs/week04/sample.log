@@ -1,0 +1,30 @@
+2026-11-20 09:00:01 INFO web GET /index 200 12ms
+2026-11-20 09:00:03 INFO web GET /login 200 25ms
+2026-11-20 09:00:04 INFO auth user=minsu login ok
+2026-11-20 09:00:09 INFO web GET /courses 200 31ms
+2026-11-20 09:01:15 WARN db slow query 1200ms table=courses
+2026-11-20 09:01:42 INFO web GET /courses/3 200 18ms
+2026-11-20 09:02:10 ERROR auth user=jiwoo wrong password
+2026-11-20 09:02:14 ERROR auth user=jiwoo wrong password
+2026-11-20 09:02:20 INFO auth user=jiwoo login ok
+2026-11-20 09:03:05 INFO web GET /index 200 11ms
+2026-11-20 09:03:30 ERROR web GET /courses/99 404 4ms
+2026-11-20 09:04:01 INFO web POST /enroll 201 45ms
+2026-11-20 09:05:12 WARN web GET /search 200 980ms
+2026-11-20 09:06:47 ERROR db connection timeout after 30s
+2026-11-20 09:06:48 ERROR web GET /courses 500 30012ms
+2026-11-20 09:06:55 INFO db reconnected
+2026-11-20 09:07:20 INFO web GET /courses 200 29ms
+2026-11-20 09:08:02 INFO auth user=hana login ok
+2026-11-20 09:08:40 INFO web POST /enroll 201 41ms
+2026-11-20 09:09:11 WARN auth user=tester too many attempts
+2026-11-20 09:10:00 INFO web GET /index 200 10ms
+2026-11-20 09:11:33 ERROR web GET /admin 403 3ms
+2026-11-20 09:12:05 INFO web GET /logout 200 9ms
+2026-11-20 09:13:50 WARN db slow query 1500ms table=enrollments
+2026-11-20 09:14:30 INFO web GET /courses/5 200 20ms
+2026-11-20 09:15:00 ERROR db disk almost full 95%
+2026-11-20 09:15:42 INFO web GET /index 200 12ms
+2026-11-20 09:16:09 INFO auth user=minsu logout
+2026-11-20 09:17:21 ERROR web POST /enroll 500 22ms
+2026-11-20 09:18:00 INFO web GET /index 200 11ms

@@ -1,0 +1,13 @@
+# crontab 예시 — 이 파일은 연습용이에요. `crontab -e` 로 열어서 아래 줄을 직접 붙여 넣어요.
+#
+# 분 시 일 월 요일   명령
+# *  *  *  *  *      (* 는 "전부")
+#
+# 매일 새벽 3시 30분에 백업 (경로는 절대 경로로, 내 사용자 이름으로 바꾸세요)
+30 3 * * * /home/내사용자이름/lab06/backup.sh /home/내사용자이름/lab06/data /home/내사용자이름/lab06/backups 7 >> /home/내사용자이름/lab06/cron.log 2>&1
+#
+# 시험용: 매분 실행 (확인이 끝나면 꼭 지우세요)
+# * * * * * /home/내사용자이름/lab06/backup.sh /home/내사용자이름/lab06/data /home/내사용자이름/lab06/backups 3 >> /home/내사용자이름/lab06/cron.log 2>&1
+#
+# 평일(월~금) 오전 9시
+# 0 9 * * 1-5 /home/내사용자이름/lab06/hello.sh

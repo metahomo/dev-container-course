@@ -1,0 +1,10 @@
+[project]
+name = "hit-counter"
+version = "0.1.0"
+description = "10주차 실습: PostgreSQL 에 방문 횟수를 세는 FastAPI 앱"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "psycopg[binary]",
+]

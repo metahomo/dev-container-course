@@ -1,0 +1,9 @@
+[project]
+name = "dev-container-course"
+version = "0.1.0"
+description = "대학교 1학년을 위한 공개 강좌 — 개발환경과 컨테이너 (12주)"
+requires-python = ">=3.12"
+dependencies = []
+
+[dependency-groups]
+site = ["mkdocs-material>=9.6", "mkdocs-jupyter>=0.25"]

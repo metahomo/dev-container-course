@@ -1,0 +1,26 @@
+# 이 파일의 OWNER 를 내 GitHub 사용자 이름(소문자)으로 바꿔요.
+name: iris-service
+
+services:
+  app:
+    # 태그는 latest 가 아니라 버전/커밋 해시로: IMAGE_TAG=sha-abc1234 docker compose up -d
+    image: ghcr.io/OWNER/iris-service:${IMAGE_TAG:-dev}
+    build: .
+    ports:
+      - "${HOST_PORT:-8000}:8000"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=2)"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+    # 보안과 자원 제한 (11주)
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    mem_limit: 512m
+    cpus: 1.0
+    pids_limit: 100

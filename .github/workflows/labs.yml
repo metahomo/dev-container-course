@@ -1,0 +1,54 @@
+# 실습 점검 — 이 강좌의 Dockerfile·compose·셸 스크립트·시험이 진짜 Ubuntu + Docker 에서 도는지 확인한다.
+# (강좌를 쓴 서버에는 Docker 가 없어서, 실제 빌드·실행 확인은 여기서 한다)
+name: labs
+on:
+  push:
+    branches: [main]
+    paths: ["docs/labs/**", ".github/workflows/labs.yml"]
+  pull_request:
+    paths: ["docs/labs/**"]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  scripts:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - name: 셸 스크립트 문법 · shellcheck
+        run: |
+          find docs/labs -name '*.sh' -print0 | xargs -0 -n1 bash -n
+          find docs/labs -name '*.sh' -print0 | xargs -0 shellcheck -S warning
+      - name: 파이썬 시험(pytest 가 있는 실습)
+        run: |
+          for t in $(find docs/labs -name 'test_*.py'); do
+            d=$(dirname "$t"); echo "== $d"
+            (cd "$d" && if [ -f pyproject.toml ]; then uv run --with pytest --with httpx pytest -q; else uv run --no-project --with pytest --with httpx --with fastapi --with scikit-learn pytest -q; fi)
+          done
+  docker:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Dockerfile 빌드
+        run: |
+          for f in $(find docs/labs -name 'Dockerfile*' ! -name '*.txt'); do
+            d=$(dirname "$f"); echo "== $f"
+            docker build -q -f "$f" -t "lab-$(basename "$d")-$(basename "$f" | tr '[:upper:].' '[:lower:]-')" "$d"
+          done
+          docker images --format '{{.Repository}} {{.Size}}' | grep '^lab-'
+      - name: compose 파일 점검
+        run: |
+          for f in $(find docs/labs -name 'compose.yaml'); do
+            echo "== $f"; (cd "$(dirname "$f")" && cp -n .env.example .env 2>/dev/null || true; docker compose config -q)
+          done
+      - name: 10주 Compose 실제로 띄우기
+        if: hashFiles('docs/labs/week10/compose.yaml') != ''
+        run: |
+          cd docs/labs/week10
+          cp -n .env.example .env 2>/dev/null || true
+          docker compose up -d --build --wait --wait-timeout 120
+          docker compose ps
+          docker compose down -v

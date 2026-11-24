@@ -1,0 +1,10 @@
+# 이미지에 넣을 필요 없는 것들
+.venv/
+__pycache__/
+*.pyc
+.git/
+.gitignore
+.env
+.env.*
+Dockerfile*
+README.md

@@ -1,0 +1,24 @@
+[project]
+name = "iris-service"
+version = "0.1.0"
+description = "붓꽃 품종을 알려 주는 작은 ML 추론 서비스 (12주 종합 프로젝트 예시)"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn>=0.30",
+    "scikit-learn>=1.5",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    "httpx2>=2",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["."]
+
+# 이 프로젝트는 "패키지로 설치"하지 않고 uv 가 환경(.venv)만 만들어요.
+[tool.uv]
+package = false

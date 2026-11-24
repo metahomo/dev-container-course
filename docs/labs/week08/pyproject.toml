@@ -1,0 +1,9 @@
+[project]
+name = "hello-api"
+version = "0.1.0"
+description = "8주차 실습: 작은 FastAPI 앱"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi",
+    "uvicorn",
+]
